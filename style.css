@@ -12,7 +12,14 @@ body {
   align-items: center;
   height: 100vh;
 }
-
+#dark {
+  position: fixed;
+  top: 2rem;
+  right: 3rem;
+}
+#darkI {
+  font-size: 2rem;
+}
 .container {
   background-color: #fff;
   padding: 30px;
@@ -159,4 +166,82 @@ h1 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   font-size: 1rem;
   width: auto;
+}
+/* Dark Mode Styling */
+/* Header color */
+body.dark-mode h1 {
+  color: #ffffff; /* white */
+}
+
+/* Task text color */
+body.dark-mode .task-text {
+  color: #ffffff; /* white for active tasks */
+}
+
+/* Optional: keep completed tasks gray */
+body.dark-mode .task-text.completed {
+  color: #777777; /* still gray */
+}
+
+body.dark-mode {
+  background-color: #121212;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode .container {
+  background-color: #1e1e2f;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .task-item {
+  background-color: #1e1e2f;
+  border: 1px solid #333;
+  color: white;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode .task-item:hover {
+  background-color: #29293d;
+}
+
+body.dark-mode .task-text.completed {
+  color: #777777;
+  text-decoration: line-through;
+}
+
+body.dark-mode .add-btn {
+  background-color: #00b894;
+  color: #fff;
+}
+
+body.dark-mode .edit-btn {
+  background-color: #4da6ff;
+  color: #fff;
+}
+
+body.dark-mode .delete-btn {
+  background-color: #ff4c4c;
+  color: #fff;
+}
+
+body.dark-mode button:hover {
+  filter: brightness(1.2);
+}
+body.dark-mode #clear {
+  background-color: white;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode #clear:hover {
+  filter: brightness(1.2); /* smooth hover effect */
+}
+body.dark-mode #pendCnt,
+body.dark-mode #compCnt,
+body.dark-mode #pendingCount,
+body.dark-mode #completedCount {
+  color: white;
 }

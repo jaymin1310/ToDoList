@@ -152,6 +152,24 @@ window.addEventListener("load", () => {
   const tasks = getTasks();
   tasks.forEach(createTask);
   updateCount();
+  const savedMode = localStorage.getItem("mode");
+  if (savedMode === "dark") {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+  const icon = document.querySelector("#dark i"); // the <i> icon
+  const text = document.querySelector("#dark"); // the <p> text
+
+  if (savedMode === "dark") {
+    icon.classList.remove("fa-moon");
+    icon.classList.add("fa-sun");
+    text.childNodes[1].nodeValue = " Light";
+  } else {
+    icon.classList.remove("fa-sun");
+    icon.classList.add("fa-moon");
+    text.childNodes[1].nodeValue = " Dark";
+  }
 });
 const loadVal = (newVal) => {
   if (newVal == "all") {
@@ -183,4 +201,22 @@ const loadVal = (newVal) => {
 filter.addEventListener("change", () => {
   const newVal = filter.value;
   loadVal(newVal);
+});
+const dark = document.querySelector("#dark");
+const modeBtn = dark.querySelector("i");
+
+dark.addEventListener("click", () => {
+  document.body.classList.toggle("dark-mode");
+
+  if (document.body.classList.contains("dark-mode")) {
+    modeBtn.classList.remove("fa-moon");
+    modeBtn.classList.add("fa-sun");
+    dark.childNodes[1].nodeValue = " Light";
+    localStorage.setItem("mode", "dark");
+  } else {
+    modeBtn.classList.remove("fa-sun");
+    modeBtn.classList.add("fa-moon");
+    dark.childNodes[1].nodeValue = " Dark";
+    localStorage.setItem("mode", "light");
+  }
 });

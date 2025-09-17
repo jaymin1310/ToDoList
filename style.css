@@ -77,9 +77,10 @@ h1 {
 .task-item:last-child {
   border-bottom: none;
 }
-.task-text {
-  flex: 1 1 auto; /* grow + shrink + wrap inside space */
-  min-width: 0; /* 🚀 critical: allows text to shrink and wrap */
+.task-text,
+.task-item input[type="text"] {
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: 16px;
   color: #555;
   word-wrap: break-word;
@@ -87,31 +88,36 @@ h1 {
   white-space: normal;
   cursor: pointer;
 }
+.task-item {
+  opacity: 0;
+  transform: translateY(-10) px;
+  transition: all 0.3s ease;
+}
+.task-item.show {
+  opacity: 1;
+  transform: translateY(0); /* slide into place */
+}
 .task-text.completed {
   text-decoration: line-through;
   color: #999;
 }
 
-.delete-btn {
-  background: none;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  background-color: red;
-  cursor: pointer;
-  font-size: 1.2rem;
-  padding: 5px;
-}
+.delete-btn,
 .edit-btn {
   background: none;
   border: none;
   border-radius: 5px;
   color: white;
-  background-color: green;
   cursor: pointer;
-  margin-right: 5px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 5px;
+}
+.delete-btn {
+  background-color: red;
+}
+.edit-btn {
+  background-color: green;
+  margin-right: 5px;
 }
 .task-count {
   margin-top: 20px;
@@ -130,7 +136,7 @@ h1 {
   margin-bottom: 0.5rem;
 }
 #clear {
-  background-color: green;
+  background-color: rgb(1, 10, 1);
   padding: 13px 10px;
   color: white;
   border-radius: 5px;
@@ -140,7 +146,7 @@ h1 {
   margin: 20px auto;
 }
 #clear:hover {
-  background-color: rgb(1, 109, 1);
+  background-color: rgb(60, 61, 60);
 }
 .filter {
   margin-bottom: 1rem;

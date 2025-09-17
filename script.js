@@ -87,14 +87,34 @@ function createTask(taskObj) {
   btn.innerText = "Delete";
   btn.className = "delete-btn";
   btn.addEventListener("click", () => {
-    let tasks = getTasks().filter((t) => t.id !== taskObj.id);
-    saveTasks(tasks);
-    li.remove();
-    updateCount();
+    setTimeout(() => {
+      let tasks = getTasks().filter((t) => t.id !== taskObj.id);
+      saveTasks(tasks);
+      li.remove();
+      updateCount();
+    }, 200);
   });
   let edit = document.createElement("button");
   edit.innerText = "Edit";
   edit.className = "edit-btn";
+  edit.addEventListener("click", () => {
+    let input = document.createElement("input");
+    input.type = "text";
+    input.value = taskObj.text;
+    li.replaceChild(input, span);
+    input.focus();
+    input.addEventListener("blur", () => {
+      if (input.value.trim() !== "") {
+        taskObj.text = input.value.trim();
+        span.innerText = taskObj.text;
+        const tasks = getTasks();
+        const task = tasks.find((t) => t.id == taskObj.id); // use == in case of type mismatch
+        if (task) task.text = taskObj.text;
+        saveTasks(tasks);
+      }
+      li.replaceChild(span, input);
+    });
+  });
   let btnContainer = document.createElement("div");
   btnContainer.className = "task-buttons";
   btnContainer.appendChild(edit);
@@ -102,6 +122,7 @@ function createTask(taskObj) {
   li.appendChild(span);
   li.appendChild(btnContainer);
   list.appendChild(li);
+  setTimeout(() => li.classList.add("show"), 10);
 }
 
 add.addEventListener("click", () => {
@@ -117,10 +138,15 @@ add.addEventListener("click", () => {
   }
 });
 clear.addEventListener("click", () => {
-  localStorage.removeItem("tasks");
-  list.innerHTML = "";
-  cnt1.innerText = "0";
-  cnt2.innerText = "0";
+  const confirmed = confirm("Are you sure to delete all your task?");
+  if (confirmed) {
+    localStorage.removeItem("tasks");
+    list.innerHTML = "";
+    cnt1.innerText = "0";
+    cnt2.innerText = "0";
+  } else {
+    console.log("Task not deleted");
+  }
 });
 window.addEventListener("load", () => {
   const tasks = getTasks();

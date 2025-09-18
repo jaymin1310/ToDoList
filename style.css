@@ -192,6 +192,7 @@ body.dark-mode {
 body.dark-mode .container {
   background-color: #1e1e2f;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 body.dark-mode .task-item {
